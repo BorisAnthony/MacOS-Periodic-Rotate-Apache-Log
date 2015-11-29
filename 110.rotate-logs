@@ -1,0 +1,33 @@
+#!/bin/sh -
+
+# EDIT Config vars ------------------------------------------------
+
+# Path to the directory holding the logs you want to rotate
+path="/path/to/your/logs"
+# Log filename widlcard
+fnwc="*_log"
+# Datestamp. Edit format if you wish.
+ds=$(date +%Y-%m-%d_%H.%M.%S)
+
+# Don't edit below this line unless you know what yer doooooin'…
+# -----------------------------------------------------------------
+
+# If there is a global system configuration file, suck it in.
+#
+if [ -r /etc/defaults/periodic.conf ]
+then
+    . /etc/defaults/periodic.conf
+    source_periodic_confs
+fi
+
+# Ok let's do this ------------------------
+echo "\n--- Rotating Logs ------------\n"
+cd $path
+for i in $fnwc; do
+    if [ -f "${i}" ]; then
+    echo "    - $i - $ds"
+    if [ -f "${i}" ]; then mv -f "${i}" "${i}.${ds}" && if [ -x /usr/bin/gzip ]; then gzip -9 "${i}.${ds}"; fi; fi
+    touch "${i}" && chmod 640 "${i}" && chown root:admin "${i}"
+    fi
+done
+echo "\n--- Done Rotating ------------\n"
