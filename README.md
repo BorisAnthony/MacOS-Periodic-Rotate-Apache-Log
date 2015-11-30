@@ -14,10 +14,10 @@ Steps:
 3. Done.
 
 Notes:
-1. the 3 digit prefix on the filename seems only to indicate the execution order of scripts in the folder.
+1. The 3 digit prefix on the filename seems only to indicate the execution order of scripts in the folder.
 2. Multiple instances of this script can be run, one for each directory of logs you want rotated. Simply run through the Steps above.
 	1. Rename the file as needed. "rotate-apachelogs", "rotate-lincolnlogs", whatever.
-3. The new log files are created with the same user and perms as the user running the script. Uncomment the "chmod" & "chown" at line 30 and edit as you need.
+3. The new log files can be created with the same user and perms as the user running the script, and CHMODed as needed. Uncomment the "touch,chmod & chown" at line 30 and edit as you need.
 
 
 Enjoy.
